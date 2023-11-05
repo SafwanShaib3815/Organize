@@ -1,52 +1,80 @@
 
-<#Author: Safwan shaib
-Date: December 14, 2020 3:17:25 pm
+<#
+Open Source Script Usage and Attribution Terms
+This script is open source, and all rights are reserved by the author.
+Copyright (c) 2020 Safwan Shaib. All rights reserved.
+
+Usage, modification, and distribution are allowed under the following terms:
+- You may use and modify the script for personal or educational purposes.
+- You may not distribute the script in a manner that implies it is your own work.
+- Attribution to the original author is required if you distribute or use the script in another project.
+- For any other uses, please contact the author for permission.
+
+Date: December 14, 2020
+Author: Safwan Shaib
+Email: shaib.safwan@gmail.com
 Description: This script organizes the downloads folder in default, or another folder of the user's choice
 #>
 
 
-
 #Elevate priviliges to run the script in admin mode
-if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit }
-
-Set-ExecutionPolicy Bypass
+#if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit }
 
 
-Write-Host "`n`t`t`t`t`t`t`t`t`tWelcome to:`tFOLDER ORGANIZER`n`nTo report bugs contact me at <sh5safwan@hotmail.com>`n`n`n"  -ForegroundColor Yellow -BackgroundColor Magenta
-Write-Host "`n`n-No deletion of any file or folder will occure using this tool. however, using it Inappropriately may produce unexpected results`n-Please don't exit the app until it asks you to"  -ForegroundColor Magenta 
-Write-Host "`n`n`n`n`n`n`n`t`t`tYour Downloads folder is set to be organized in default`n`n`n`t`t`tDo you want to organize your Downloads folder?`n`n`t`t`tType 'Yes' to continue or 'No' to enter a path of the folder you want to organize`n`n"
-$ConfirmPath = Read-Host "Type here"
+Write-Host "`n`t`t`t`t`t`t`t`t`tWelcome to:`tORGANIZE"  -ForegroundColor Yellow -BackgroundColor Magenta
+Write-Host "`n`nDescription: This program organizes the downloads folder in default or a folder of your choice
+Author: Safwan Shaib
+Email: shaib.safwan@gmail.com`n" -ForegroundColor Yellow 
+Write-Host "`nUsage & Instructions:`n
+- No deletion of any file or folder will occure using this tool. however, using it Inappropriately may produce unexpected results.`n
+- To exit anytime click CTRL+C (Only if necessary).`n
+- Follow on-screen prompts until the end.`n
+- At the end, you'll have an option to undo the changes made by the program." -ForegroundColor Magenta 
 
-switch ($ConfirmPath) {
-    "yes" {
-        $path = $home + '\downloads'
-        Write-Output "`n`n`t`t`t`t`tHi i'm your junk file, delete me or don't`n`nThis text file saves the old order of your folder in case you want it back, if you delete it you won't be able to get your folder's old state back.`nHowever, you still can create a new one with the file names of which you want back`n`nFeel free to edit this file for including/excluding the files that you want back`n`nNote: Deleteing a file's name from this file dosn't delete the file but prevents it from being back to the main folder`n`n" >> $path\'Old Order.txt'
-        (Get-ChildItem -File -Name $path)  >> $path\'Old Order.txt' ## Save the status of destination folder to undo the changes 
-    }
-    "no" {
-        Write-host "`n`t`t`tOK, Enter the location of your folder and please make sure it's in a path format, for example,  the following path is to organize your documents folder:`n"
-        Write-Host  "`t`t`tC:\Users\username\documents" -ForegroundColor Cyan
-        Write-Host "`n`n`n`t`t`tHint: you can copy the path from file explorer and paste it here by right clicking your mouse`n`n"
-        $path = Read-Host "Type here"
-        Try {
-            Resolve-Path -Path $path -ErrorAction Stop
+Write-Host "`n`n`n`n`n`t`t`tYour Downloads folder is set to be organized in default, do you want to organize your Downloads folder?`n
+`t`t`tType 'Yes' to continue or 'No' to enter a path of the folder you want to organize`n`n"
+
+$continueLoop = $true
+while ($continueLoop) {
+    $ConfirmPath = Read-Host "Type here"
+
+    switch ($ConfirmPath) {
+        "yes" {
+            $path = $home + '\downloads'
+            Write-Output "`n`n`t`t`t`t`tHi, I'm your junk file. Delete me or don't.`n`nThis text file saves the old order of your folder in case you want it back. If you delete it, you won't be able to restore your folder's old state.`nHowever, you can still create a new one with the file names you want back.`n`nFeel free to edit this file for including/excluding the files you want back.`n`nNote: Deleting a file's name from this file doesn't delete the file but prevents it from being restored to the main folder.`n`n" >> "$path\Old Order.txt"
+            (Get-ChildItem -File -Name $path)  >> "$path\Old Order.txt" ## Save the status of the destination folder to undo the changes 
+            $continueLoop = $false
+			break
         }
-        Catch {
-            while (-not (Resolve-Path -Path $path)) {
-                Write-Warning "Please check your path and"
-                $path = Read-Host "`nTry again"
+        "no" {
+            Write-Host "`nEnter the folder location (e.g.," -NoNewline
+			Write-Host "C:\Users\username\documents" -ForegroundColor Cyan -NoNewline
+			Write-Host "):"
+			Write-Host "Hint: You can copy the path from File Explorer and paste by a mouse right-click.`n" -ForegroundColor Yellow
+
+            $path = Read-Host "Type here"
+            try {
+                Resolve-Path -Path $path -ErrorAction Stop
             }
+            catch {
+                while (-not (Resolve-Path -Path $path)) {
+                    Write-Warning "Please enter a valid path"
+                    $path = Read-Host "`nTry again"
+                }
+            }
+            
+            Write-Output "`n`n`t`t`t`t`tHi, I'm your junk file. Delete me or don't.`n`nThis text file saves the old order of your folder in case you want it back. If you delete it, you won't be able to restore your folder's old state.`nHowever, you can still create a new one with the file names you want back.`n`nFeel free to edit this file for including/excluding the files you want back.`n`nNote: Deleting a file's name from this file doesn't delete the file but prevents it from being restored to the main folder.`n`n" >> "$path\Old Order.txt"
+            (Get-ChildItem -File -Name $path)  >> "$path\Old Order.txt" ## Save the status of the destination folder to undo the changes
+            $continueLoop = $false
+			break
         }
-        
-        Write-Output "`n`n`t`t`t`t`tHi i'm your junk file, delete me or don't`n`nThis text file saves the old order of your folder in case you want it back, if you delete it you won't be able to get your folder's old state back.`nHowever, you still can create a new one with the file names of which you want back`n`nFeel free to edit this file for including/excluding the files that you want back`n`nNote: Deleteing a file's name from this file dosn't delete the file but prevents it from being back to the main folder`n`n" >> $path\'Old Order.txt'
-        (Get-ChildItem -File -Name $path)  >> $path\'Old Order.txt' ## Save the status of destination folder to undo the changes
+        Default {
+            Write-host "`t`t`t`Hmmm, I didn't understand that, are you in a hurry?"
+            Read-Host "`n`t`t`tHit Enter and try again"
+        }
     }
-    Default {
-        Write-host `t`t`t"Hmmm, i'm not sure I understand that`t Are you in hurry?"
-        Read-Host "`n`t`t`tHit Enter and try again"
-        break 
-    }
-} 
+}
+
 
     
 Set-Location $path
