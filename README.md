@@ -1,24 +1,12 @@
 # Organize Folders
 
-<div style="background-color: #FFFF00; padding: 10px;">
-    <h3>Organize</h3>
-</div>
-
-<div style="background-color: #FFA500; padding: 10px;">
-    <p><strong>Author:</strong> Safwan Shaib</p>
-</div>
-
-<div style="background-color: #00FF00; padding: 10px;">
-    <p><strong>License:</strong> Open Source</p>
-</div>
-
 ## Table of Contents
 - [Description](#description)
 - [Usage](#usage)
 - [Attribution](#attribution)
 - [Contact](#contact)
 - [License](#license)
-
+a
 ## Description
 This open-source PowerShell script is designed to help you organize your Downloads folder, or a folder of your choice, by moving specific types of files into categorized subfolders. The script is designed to keep your files safe while tidying up your Downloads directory.
 
