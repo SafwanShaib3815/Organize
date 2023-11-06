@@ -23,7 +23,7 @@ The script will prompt you for whether you want to organize your Downloads folde
 Usage, modification, and distribution of this script are allowed under the following terms:
 - You may use and modify the script for personal or educational purposes.
 - You may not distribute the script in a manner that implies it is your own work.
-- Attribution to the original author, Safwan Shaib, is required if you distribute or use the script in another project.
+- Attribution to the original author, is required if you distribute or use the script in another project.
 - For any other uses, please contact the author for permission.
 
 ## Contact
