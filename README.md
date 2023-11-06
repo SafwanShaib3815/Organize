@@ -1,4 +1,14 @@
-# Organize Downloads Folder Script
+# Organize Folder
+
+<div style="background-color: #FFFF00; padding: 10px;">
+    <h3>Organize</h3>
+</div>
+<div style="background-color: #FFA500; padding: 10px;">
+    <p><strong>Author:</strong> Safwan Shaib</p>
+</div>
+<div style="background-color: #00FF00; padding: 10px;">
+    <p><strong>License:</strong> Open Source</p>
+</div>
 
 ## Table of Contents
 - [Description](#description)
@@ -12,11 +22,12 @@ This open-source PowerShell script is designed to help you organize your Downloa
 
 The script will prompt you for whether you want to organize your Downloads folder, and you can also specify a custom folder location for organization. It categorizes files into various subfolders based on their types, such as Documents, Compressed files, Images, Apps, Movies, Audios, and others. It also creates an 'Old Order.txt' file to keep track of the original order of your folder, allowing you to revert to the previous state if needed.
 
-## Usage
+## Usage & Instructions
 - No files or folders are deleted during the execution of this script.
 - To exit the script at any time, press CTRL+C (only if necessary).
 - Follow the on-screen prompts to organize your chosen folder.
 - At the end of the organization process, you will have the option to undo the changes made by the program by typing 'CtrlZ' when prompted.
+- No installation required
 
 ## Attribution
 Usage, modification, and distribution of this script are allowed under the following terms:
