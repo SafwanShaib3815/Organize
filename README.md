@@ -1,11 +1,13 @@
-# Organize Folder
+# Organize Folders
 
 <div style="background-color: #FFFF00; padding: 10px;">
     <h3>Organize</h3>
 </div>
+
 <div style="background-color: #FFA500; padding: 10px;">
     <p><strong>Author:</strong> Safwan Shaib</p>
 </div>
+
 <div style="background-color: #00FF00; padding: 10px;">
     <p><strong>License:</strong> Open Source</p>
 </div>
